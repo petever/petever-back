@@ -9,6 +9,12 @@ application-db.properties
 application-notion.properties
 application-oauth.properties
 
+.DS_store
+gradlew
+gradlew.bat
+settings.gradle
+
+
 ### STS ###
 .apt_generated
 .classpath
