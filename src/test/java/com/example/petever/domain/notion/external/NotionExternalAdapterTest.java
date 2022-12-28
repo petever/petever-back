@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -121,5 +123,14 @@ class NotionExternalAdapterTest {
 
                     System.out.println("contents = " + contents);
                 });
+    }
+
+    @Test
+    public void tes2t() {
+        ZonedDateTime parse1 = ZonedDateTime.parse("2022-12-16T10:44:00.000");
+        System.out.println(parse1);
+
+        LocalDateTime parse = LocalDateTime.parse("2022-12-16T10:44:00.000");
+        System.out.println("parse = " + parse);
     }
 }

@@ -33,7 +33,9 @@ public class Image {
     public String getImageUrl() {
         return Optional.ofNullable(files)
                 .orElseGet(Collections::emptyList)
-                .stream().map(FilesItem::getName)
+                .stream()
+                .map(FilesItem::getFile)
+                .map(File::getUrl)
                 .findFirst()
                 .orElse(null);
     }

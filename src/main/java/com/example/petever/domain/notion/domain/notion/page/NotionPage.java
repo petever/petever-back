@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Document(collection = "notion_page")
@@ -13,7 +14,7 @@ public class NotionPage {
     private Object cover;
 
     @JsonProperty("created_time")
-    private String createdTime;
+    private LocalDateTime createdTime;
 
     @JsonProperty("parent")
     private Parent parent;
@@ -22,7 +23,7 @@ public class NotionPage {
     private boolean archived;
 
     @JsonProperty("last_edited_time")
-    private String lastEditedTime;
+    private LocalDateTime lastEditedTime;
 
     @JsonProperty("icon")
     private Object icon;
@@ -74,12 +75,12 @@ public class NotionPage {
         return properties.getSubCategory();
     }
 
-    public ZonedDateTime getCreated() {
-        return properties.getCreated();
+    public String getCreated() {
+        return properties.getCreated().toString();
     }
 
-    public ZonedDateTime getEdited() {
-        return properties.getEdited();
+    public String getEdited() {
+        return properties.getEdited().toString();
     }
 
     public String getImage() {

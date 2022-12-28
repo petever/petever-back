@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
 @Getter
@@ -18,8 +20,8 @@ public class BoardSummary {
     private final String middleCategory;
     private final String subCategory;
     private final String image;
-    private final ZonedDateTime created;
-    private final ZonedDateTime edited;
+    private final String created;
+    private final String edited;
 
     public BoardSummary(NotionPage notionPage) {
         this.uid = notionPage.getId();

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Results {
 
@@ -14,8 +15,8 @@ public class Results {
     @Id
     private final String id;
     private final NotionBlockParent parent;
-    private final LocalDate createdTime;
-    private final LocalDate lastEditedTime;
+    private final LocalDateTime createdTime;
+    private final LocalDateTime lastEditedTime;
     private final NotionBlockCreated createdBy;
     private final NotionBlockLastEdited lastEditedBy;
     private final Boolean hasChildren;
@@ -30,8 +31,8 @@ public class Results {
             @JsonProperty("object") NotionObjectType object,
             @JsonProperty("id") String id,
             @JsonProperty("parent") NotionBlockParent parent,
-            @JsonProperty("created_time") LocalDate createdTime,
-            @JsonProperty("last_edited_time") LocalDate lastEditedTime,
+            @JsonProperty("created_time") LocalDateTime createdTime,
+            @JsonProperty("last_edited_time") LocalDateTime lastEditedTime,
             @JsonProperty("create_by") NotionBlockCreated createdBy,
             @JsonProperty("last_edited_by") NotionBlockLastEdited lastEditedBy,
             @JsonProperty("has_children") Boolean hasChildren,

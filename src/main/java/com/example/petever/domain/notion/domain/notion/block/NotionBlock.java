@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Document(collection = "notion_block")
 public class NotionBlock extends Results {
@@ -13,8 +14,8 @@ public class NotionBlock extends Results {
     public NotionBlock(@JsonProperty("object") NotionObjectType object,
                        @JsonProperty("id") String id,
                        @JsonProperty("parent") NotionBlockParent parent,
-                       @JsonProperty("created_time") LocalDate createdTime,
-                       @JsonProperty("last_edited_time") LocalDate lastEditedTime,
+                       @JsonProperty("created_time") LocalDateTime createdTime,
+                       @JsonProperty("last_edited_time") LocalDateTime lastEditedTime,
                        @JsonProperty("create_by") NotionBlockCreated createdBy,
                        @JsonProperty("last_edited_by") NotionBlockLastEdited lastEditedBy,
                        @JsonProperty("has_children") Boolean hasChildren,
