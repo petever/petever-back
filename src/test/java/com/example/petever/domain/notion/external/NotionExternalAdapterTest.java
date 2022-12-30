@@ -1,5 +1,6 @@
 package com.example.petever.domain.notion.external;
 
+import com.example.petever.domain.board.web.response.BoardBlock;
 import com.example.petever.domain.notion.domain.notion.block.NotionBlock;
 import com.example.petever.domain.notion.domain.notion.block.NotionBlocks;
 import com.example.petever.domain.notion.domain.notion.page.NotionPage;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -75,54 +77,16 @@ class NotionExternalAdapterTest {
 
     @Test
     @DisplayName("TEST")
+    @Transactional
     public void test() throws IOException {
-        Optional<NotionBlocks> notionDataBase = notionExternalAdapter.getNotionDatabase(dataBaseId);
-        List<String> ids = notionDataBase.map(NotionBlocks::getPageIds).orElse(Collections.singletonList(""));
+        Optional<NotionBlocks> foundNotionBlock = notionBlocksRepository.findById("ecebb2ed-ebf1-4f98-b003-52d8c176dff0");
 
-        ids.stream()
-                .forEach(id -> {
-                    try {
-                        Optional<NotionPage> notionBlock = notionExternalAdapter.getNotionPage(id);
-                        notionBlock
-                                .map(notionPageRepository::save)
-                                .orElseThrow(() -> new RuntimeException("Notion Block is Null"));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+        List<String> contents = foundNotionBlock.map(NotionBlocks::getContentBlockAndLineSeparator)
+                .orElse(Collections.singletonList(""));
 
-        ids.stream()
-                .forEach(id -> {
-                    System.out.println("id = " + id);
-                    Optional<NotionBlock> foundNotionBlock = notionBlockRepository.findById(id);
-                    System.out.println("foundId.get() = " + foundNotionBlock.orElse(null));
-                    System.out.println("foundId.getTitle() = " + foundNotionBlock.map(NotionBlock::getTitle).orElse(null));
-                });
+        Optional<List<BoardBlock>> boardBlocks = foundNotionBlock.map(NotionBlocks::getContentBlock);
 
-
-        ids.stream()
-                .forEach(id -> {
-                    try {
-                        Optional<NotionBlocks> notionBlocks = notionExternalAdapter.getNotionBlockChildren(id);
-                        notionBlocks
-                                .map(notionBlocksRepository::save)
-                                .orElseThrow(() -> new RuntimeException("Notion Blocks is Null"));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-
-                });
-
-        ids.stream()
-                .forEach(id -> {
-                    System.out.println("id = " + id);
-                    Optional<NotionBlocks> foundNotionBlock = notionBlocksRepository.findById(id);
-
-                    List<String> contents = foundNotionBlock.map(NotionBlocks::getContentBlockAndLineSeparator)
-                            .orElse(Collections.singletonList(""));
-
-                    System.out.println("contents = " + contents);
-                });
+        System.out.println("boardBlocks = " + boardBlocks);
     }
 
     @Test

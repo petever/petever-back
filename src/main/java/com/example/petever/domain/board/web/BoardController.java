@@ -1,10 +1,12 @@
 package com.example.petever.domain.board.web;
 
 import com.example.petever.domain.board.application.BoardService;
+import com.example.petever.domain.board.web.response.BoardBlocks;
 import com.example.petever.domain.board.web.response.BoardSummary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,7 +23,12 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public List<String> getBoard(@PathVariable String boardId) {
+    public BoardBlocks getBoard(@PathVariable String boardId) {
         return boardService.getBoard(boardId);
+    }
+
+    @GetMapping("/synchronization")
+    public void synchronization() throws IOException {
+        boardService.synchronization();
     }
 }

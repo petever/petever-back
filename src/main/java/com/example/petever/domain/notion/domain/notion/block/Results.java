@@ -1,12 +1,12 @@
 package com.example.petever.domain.notion.domain.notion.block;
 
+import com.example.petever.domain.board.web.response.BoardBlock;
 import com.example.petever.domain.notion.enumuration.NotionBlockType;
 import com.example.petever.domain.notion.enumuration.NotionObjectType;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Id;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Results {
@@ -25,6 +25,7 @@ public class Results {
     private final ChildPage childPage;
     private final NotionImage image;
     private final Paragraph paragraph;
+    private final Paragraph heading;
 
     @JsonCreator
     public Results(
@@ -40,7 +41,8 @@ public class Results {
             @JsonProperty("type") NotionBlockType type,
             @JsonProperty("image") NotionImage image,
             @JsonProperty("child_page") ChildPage childPage,
-            @JsonProperty("paragraph") Paragraph paragraph) {
+            @JsonProperty("paragraph") Paragraph paragraph,
+            @JsonProperty("heading_2") Paragraph heading) {
 
         this.object = object;
         this.id = id;
@@ -55,22 +57,29 @@ public class Results {
         this.image = image;
         this.childPage = childPage;
         this.paragraph = paragraph;
+        this.heading = heading;
     }
 
     public Paragraph getParagraph() {
         return paragraph;
     }
 
-    public String getContents() {
+    public BoardBlock getContents() {
+        String contents = "";
+
         if (isImage()) {
-            return this.image.getImageContents();
+            contents = this.image.getImageContents();
         }
 
         if (isParagraph()) {
-            return this.paragraph.getParagraphContents();
+            contents = this.paragraph.getParagraphContents();
         }
 
-        return "";
+        if (isHeader()) {
+            contents = this.heading.getParagraphContents();
+        }
+
+        return new BoardBlock(this.type, contents);
     }
 
     public String getTitle() {
@@ -88,6 +97,8 @@ public class Results {
     public Boolean isChildPage() {
         return this.type == NotionBlockType.CHILD_PAGE;
     }
+
+    public Boolean isHeader() { return this.type == NotionBlockType.HEADING_2; }
 
     public String getId() {
         return this.id;

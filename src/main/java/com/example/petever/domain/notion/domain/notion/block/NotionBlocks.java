@@ -1,5 +1,6 @@
 package com.example.petever.domain.notion.domain.notion.block;
 
+import com.example.petever.domain.board.web.response.BoardBlock;
 import com.example.petever.domain.notion.enumuration.NotionObjectType;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,7 +28,7 @@ public class NotionBlocks {
         this.results = results;
     }
 
-    public List<String> getContentBlock() {
+    public List<BoardBlock> getContentBlock() {
         return results.stream()
                 .map(Results::getContents)
                 .collect(Collectors.toList());
