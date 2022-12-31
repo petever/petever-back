@@ -86,4 +86,8 @@ public class NotionPage {
     public String getImage() {
         return properties.getImage();
     }
+
+    public void changeImage(String savePath) {
+        this.properties.changeUrl(savePath);
+    }
 }

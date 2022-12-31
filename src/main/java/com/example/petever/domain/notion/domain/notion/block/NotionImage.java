@@ -17,6 +17,10 @@ public class NotionImage {
     private String type;
 
     public String getImageContents() {
-        return Optional.ofNullable(file).map(File::getUrl).orElse("");
+        return Optional.of(file).map(File::getUrl).orElse("");
+    }
+
+    public void changeImageUrl(String savePath) {
+        Optional.of(file).ifPresent(f -> f.changeImageUrl(savePath));
     }
 }

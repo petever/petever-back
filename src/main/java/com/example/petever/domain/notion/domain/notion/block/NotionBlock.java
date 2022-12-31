@@ -36,4 +36,7 @@ public class NotionBlock extends Results {
         return super.getId();
     }
 
+    public void changeImage(String savePath) {
+        super.changeImage(savePath);
+    }
 }

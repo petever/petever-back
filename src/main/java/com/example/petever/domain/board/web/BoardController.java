@@ -27,6 +27,7 @@ public class BoardController {
         return boardService.getBoard(boardId);
     }
 
+    // TODO: Spring Batch로 변경예정
     @GetMapping("/synchronization")
     public void synchronization() throws IOException {
         boardService.synchronization();

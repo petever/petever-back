@@ -15,7 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Collections;
@@ -78,7 +82,7 @@ class NotionExternalAdapterTest {
     @Test
     @DisplayName("TEST")
     @Transactional
-    public void test() throws IOException {
+    public void test() {
         Optional<NotionBlocks> foundNotionBlock = notionBlocksRepository.findById("ecebb2ed-ebf1-4f98-b003-52d8c176dff0");
 
         List<String> contents = foundNotionBlock.map(NotionBlocks::getContentBlockAndLineSeparator)
@@ -87,14 +91,5 @@ class NotionExternalAdapterTest {
         Optional<List<BoardBlock>> boardBlocks = foundNotionBlock.map(NotionBlocks::getContentBlock);
 
         System.out.println("boardBlocks = " + boardBlocks);
-    }
-
-    @Test
-    public void tes2t() {
-        ZonedDateTime parse1 = ZonedDateTime.parse("2022-12-16T10:44:00.000");
-        System.out.println(parse1);
-
-        LocalDateTime parse = LocalDateTime.parse("2022-12-16T10:44:00.000");
-        System.out.println("parse = " + parse);
     }
 }

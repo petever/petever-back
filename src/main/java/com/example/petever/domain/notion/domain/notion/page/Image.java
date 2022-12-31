@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class Image {
 
@@ -39,4 +38,14 @@ public class Image {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void changeUrl(String savePath) {
+        Optional.ofNullable(files)
+                .orElseGet(Collections::emptyList)
+                .stream()
+                .map(FilesItem::getFile)
+                .forEach(file -> file.setUrl(savePath));
+    }
+
+
 }

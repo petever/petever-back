@@ -13,4 +13,8 @@ public class File {
     public String getUrl() {
         return this.url;
     }
+
+    public void changeImageUrl(String savePath) {
+        this.url = savePath;
+    }
 }

@@ -45,4 +45,19 @@ public class NotionBlocks {
                 .map(Results::getId)
                 .collect(Collectors.toList());
     }
+
+    public String getImage() {
+        return results.stream()
+                .map(Results::getImage)
+                .collect(Collectors.joining());
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void changeImage(String savePath) {
+        results.stream()
+                .forEach(result -> result.changeImage(savePath));
+    }
 }

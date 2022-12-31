@@ -10,6 +10,7 @@ import com.example.petever.domain.notion.external.NotionExternalAdapter;
 import com.example.petever.domain.notion.persistence.NotionBlocksRepository;
 import com.example.petever.domain.notion.persistence.NotionPageRepository;
 import com.example.petever.domain.board.web.response.BoardSummary;
+import com.example.petever.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +85,11 @@ public class BoardService {
                     try {
                         Optional<NotionPage> notionBlock = notionExternalAdapter.getNotionPage(id);
                         notionBlock
-                                .map(notionPageRepository::save)
+                                .map(notionPage -> {
+                                    String savePath = FileUtil.save(notionPage.getImage(), notionPage.getId() + ".png");
+                                    notionPage.changeImage(savePath);
+                                    return notionPageRepository.save(notionPage);
+                                })
                                 .orElseThrow(() -> new RuntimeException("Notion Block is Null"));
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -97,7 +102,14 @@ public class BoardService {
                     try {
                         Optional<NotionBlocks> notionBlocks = notionExternalAdapter.getNotionBlockChildren(id);
                         notionBlocks
-                                .map(notionBlocksRepository::save)
+                                .map(block -> {
+                                    String image = block.getImage();
+                                    if (!image.isBlank()) {
+                                        String savePath = FileUtil.save(image, block.getId() + ".png");
+                                        block.changeImage(savePath);
+                                    }
+                                    return notionBlocksRepository.save(block);
+                                })
                                 .orElseThrow(() -> new RuntimeException("Notion Blocks is Null"));
                     } catch (IOException ioException) {
                         ioException.printStackTrace();

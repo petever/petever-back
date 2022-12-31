@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class Results {
 
@@ -102,5 +103,13 @@ public class Results {
 
     public String getId() {
         return this.id;
+    }
+
+    public String getImage() {
+        return Optional.ofNullable(image).map(NotionImage::getImageContents).orElse("");
+    }
+
+    public void changeImage(String savePath) {
+        Optional.ofNullable(image).ifPresent(image -> image.changeImageUrl(savePath));
     }
 }

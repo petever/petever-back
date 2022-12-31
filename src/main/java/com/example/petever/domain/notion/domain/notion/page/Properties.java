@@ -73,4 +73,9 @@ public class Properties {
     public String getImage() {
         return this.image.getImageUrl();
     }
+
+    public void changeUrl(String savePath) {
+        this.image.changeUrl(savePath);
+    }
+
 }
