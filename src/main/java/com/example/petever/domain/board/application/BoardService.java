@@ -103,11 +103,13 @@ public class BoardService {
                         Optional<NotionBlocks> notionBlocks = notionExternalAdapter.getNotionBlockChildren(id);
                         notionBlocks
                                 .map(block -> {
-                                    String image = block.getImage();
-                                    if (!image.isBlank()) {
-                                        String savePath = FileUtil.save(image, block.getId() + ".png");
-                                        block.changeImage(savePath);
-                                    }
+                                    block.getResults().stream()
+                                            .forEach(result -> {
+                                                if (!result.getImage().isBlank()) {
+                                                    String savePath = FileUtil.save(result.getImage(), result.getId() + ".png");
+                                                    result.changeImage(savePath);
+                                                }
+                                            });
                                     return notionBlocksRepository.save(block);
                                 })
                                 .orElseThrow(() -> new RuntimeException("Notion Blocks is Null"));

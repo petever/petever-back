@@ -60,4 +60,8 @@ public class NotionBlocks {
         results.stream()
                 .forEach(result -> result.changeImage(savePath));
     }
+
+    public List<NotionBlock> getResults() {
+        return results;
+    }
 }

@@ -11,6 +11,7 @@ import java.nio.channels.ReadableByteChannel;
 public class FileUtil {
 
     private static final String FILE_PATH = "src/main/resources/static/images/";
+//    private static final String FILE_PATH = "/home/ec2-user/new-petever/src/main/resources/static/images/";
     private static final String RETURN_FILE_PATH = "/images/";
 
     public static String save(String urlPath, String fileName) {
