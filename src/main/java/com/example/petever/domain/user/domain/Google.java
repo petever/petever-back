@@ -20,7 +20,7 @@ public class Google implements Social {
 
     @Override
     public String authorization() {
-        return "redirect:" + GOOGLE_AUTHENTICATION_URL;
+        return GOOGLE_AUTHENTICATION_URL;
     }
 
     @Override

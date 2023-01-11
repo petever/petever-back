@@ -4,17 +4,17 @@ import com.example.petever.domain.user.application.UserService;
 import com.example.petever.domain.user.application.UserSessionService;
 import com.example.petever.domain.user.domain.User;
 import com.example.petever.domain.user.enumuration.SocialType;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-@Controller
-@RequestMapping("/user")
+@RestController
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -22,8 +22,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{socialType}/authentication")
-    public String authentication(@PathVariable SocialType socialType) {
-        return userService.authentication(socialType);
+    public void authentication(@PathVariable SocialType socialType, HttpServletResponse response) throws IOException {
+        response.sendRedirect(userService.authentication(socialType));
     }
 
     @GetMapping("/{socialType}/login")
