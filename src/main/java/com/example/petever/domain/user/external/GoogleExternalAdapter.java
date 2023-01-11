@@ -47,6 +47,7 @@ public class GoogleExternalAdapter {
             GoogleOauthResponse googleOauthResponse = requestAccessToken(code);
             return verifyToken(googleOauthResponse);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("google oauth error");
         }
     }
