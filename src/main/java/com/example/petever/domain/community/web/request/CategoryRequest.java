@@ -1,6 +1,7 @@
 package com.example.petever.domain.community.web.request;
 
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -9,9 +10,11 @@ public class CategoryRequest {
     private CategoryRequest() {
     }
 
-    @Value
+    @Data
     public static class CreateCategoryRequest {
         @NotBlank
-        String categoryName;
+        @JsonProperty("categoryName")
+        private String categoryName;
+
     }
 }

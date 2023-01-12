@@ -25,7 +25,6 @@ public class CategoryDocument {
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
     @Embedded
-    @Indexed
     private Category category;
     private Boolean deleted;
     private LocalDateTime deletedAt;
@@ -76,6 +75,6 @@ public class CategoryDocument {
     }
 
     public Category getCategory() {
-        return category.getCategory(this.id.toHexString());
+        return category.category(this.id.toHexString());
     }
 }

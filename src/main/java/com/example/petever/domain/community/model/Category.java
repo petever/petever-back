@@ -2,6 +2,7 @@ package com.example.petever.domain.community.model;
 
 import lombok.*;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode(of = {"id", "categoryName", "parentId", "level"})
+@CompoundIndex(def = "{'categoryName': 1, 'level': 1, 'parentId': 1}", unique = true)
 public class Category {
     @Transient
     private String id;
@@ -43,7 +45,7 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public Category getCategory(String id) {
+    public Category category(String id) {
         this.id = id;
         return this;
     }
