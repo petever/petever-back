@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
+@EqualsAndHashCode(of = {"id", "categoryName", "parentId", "level"})
 public class Category {
     @Transient
     private String id;

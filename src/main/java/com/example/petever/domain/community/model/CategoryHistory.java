@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class CategoryHistory {
     private String beforeCategoryName;
     private String changeUserId;
 
-    private ZonedDateTime changedAt;
+    private LocalDateTime changedAt;
 
     private CategoryHistoryType categoryHistoryType;
 
@@ -28,7 +28,7 @@ public class CategoryHistory {
     public CategoryHistory(String beforeCategoryName, String changeUserId, CategoryType categoryType, CategoryHistoryType categoryHistoryType) {
         this.beforeCategoryName = beforeCategoryName;
         this.changeUserId = changeUserId;
-        this.changedAt = ZonedDateTime.now();
+        this.changedAt = LocalDateTime.now();
         this.categoryHistoryType = categoryHistoryType;
     }
 

@@ -10,7 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
@@ -29,7 +29,7 @@ public class CategoryDocument {
     private Category category;
     private Boolean deleted;
     private LocalDateTime deletedAt;
-    private List<CategoryHistory> histories;
+    private List<CategoryHistory> histories = new ArrayList<>();
 
     @Builder
     public CategoryDocument(CategoryType categoryType, String categoryName, String ownerId, Long level, ObjectId parentId) {
@@ -42,7 +42,6 @@ public class CategoryDocument {
         this.categoryType = categoryType;
         this.ownerId = ownerId;
         this.deleted = false;
-        this.deletedAt = LocalDateTime.MIN.minus(1, ChronoUnit.SECONDS);
     }
 
     public CategoryDocument createChild(String categoryName) {
