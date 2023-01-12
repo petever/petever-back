@@ -8,5 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.stream.Stream;
 
 public interface MongoCategoryRepository extends MongoRepository<CategoryDocument, ObjectId>, CategoryRepository {
-    Stream<CategoryDocument> findAllByCategoryTypeAndOwnerId(CategoryType categoryType,String ownerId);
+    Stream<CategoryDocument> findAllByCategoryTypeAndOwnerIdAndDeletedFalse(CategoryType categoryType,String ownerId);
 }

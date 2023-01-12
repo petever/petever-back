@@ -18,7 +18,7 @@ public class CategoryService {
 
     public List<Category> getCategories(CategoryType categoryType, String ownerId) {
         return categoryRepository
-                .findAllByCategoryTypeAndOwnerId(categoryType, ownerId)
+                .findAllByCategoryTypeAndOwnerIdAndDeletedFalse(categoryType, ownerId)
                 .map(CategoryDocument::getCategory)
                 .collect(Collectors.toList());
     }
@@ -50,5 +50,12 @@ public class CategoryService {
                         .orElseThrow()
                         .changeCategoryName(categoryName, changeUserId))
                 .getCategory();
+    }
+
+    public Category deleteCategory(String id, String deleteUserId) {
+        return categoryRepository.save(categoryRepository
+                .findById(id)
+                .orElseThrow()
+                .removeCategory(deleteUserId)).getCategory();
     }
 }
