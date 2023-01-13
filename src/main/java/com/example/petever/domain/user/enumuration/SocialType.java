@@ -1,5 +1,9 @@
 package com.example.petever.domain.user.enumuration;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum SocialType {
-    GOOGLE, KAKAO
+    @JsonProperty("google")
+    GOOGLE,
+    KAKAO
 }

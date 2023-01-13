@@ -17,7 +17,7 @@ public class Kakao implements Social {
 
     @Override
     public String authorization() {
-        return "redirect:" + KAKAO_ACCOUNT_URL;
+        return KAKAO_ACCOUNT_URL;
     }
 
     @Override

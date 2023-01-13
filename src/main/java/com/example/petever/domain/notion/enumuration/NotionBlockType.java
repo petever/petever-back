@@ -11,6 +11,8 @@ public enum NotionBlockType {
     CHILD_PAGE,
     @JsonProperty("heading_2")
     HEADING_2,
+    @JsonProperty("heading_3")
+    HEADING_3,
     @JsonProperty("column_list")
     COLUMN_LIST;
 }

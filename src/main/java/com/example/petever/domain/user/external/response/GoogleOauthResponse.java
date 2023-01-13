@@ -1,9 +1,9 @@
 package com.example.petever.domain.user.external.response;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class GoogleOauthResponse {
 
     private final String accessToken;
@@ -12,6 +12,27 @@ public class GoogleOauthResponse {
     private final String scope;
     private final String tokenType;
     @Getter
-    private final String idToken;
+    private String idToken;
 
+    @JsonCreator
+    public GoogleOauthResponse(
+            @JsonProperty("access_token")
+            String accessToken,
+            @JsonProperty("expires_in")
+            String expiresIn,
+            @JsonProperty("refresh_token")
+            String refreshToken,
+            @JsonProperty("scope")
+            String scope,
+            @JsonProperty("token_type")
+            String tokenType,
+            @JsonProperty("id_token")
+            String idToken) {
+        this.accessToken = accessToken;
+        this.expiresIn = expiresIn;
+        this.refreshToken = refreshToken;
+        this.scope = scope;
+        this.tokenType = tokenType;
+        this.idToken = idToken;
+    }
 }
