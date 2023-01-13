@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Swagger2Config {
-    // TEST
 
     @Bean
     public GroupedOpenApi publicApi() {
