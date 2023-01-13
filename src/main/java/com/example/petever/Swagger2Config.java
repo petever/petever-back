@@ -19,8 +19,8 @@ public class Swagger2Config {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("펫에 API")
-                        .description("동물 커뮤니티 펫에버 AP버I 명세서입니다.")
+                .info(new Info().title("펫에버 API")
+                        .description("동물 커뮤니티 펫에버 API 명세서입니다.")
                         .version("v0.0.1"));
     }
 }
