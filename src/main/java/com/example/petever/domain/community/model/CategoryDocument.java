@@ -75,6 +75,6 @@ public class CategoryDocument {
     }
 
     public Category getCategory() {
-        return category.category(this.id.toHexString());
+        return category.category(this.id);
     }
 }

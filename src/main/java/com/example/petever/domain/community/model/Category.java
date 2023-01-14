@@ -16,10 +16,7 @@ import java.time.LocalDateTime;
 @CompoundIndex(def = "{'categoryName': 1, 'level': 1, 'parentId': 1}", unique = true)
 public class Category {
     @Transient
-    private String id;
-
-    @Transient
-    private String prId;
+    private ObjectId id;
 
     private Long level;
 
@@ -30,7 +27,6 @@ public class Category {
     @Builder
     public Category(Long level, ObjectId parentId, String categoryName) {
         this.id = null;
-        this.prId = null;
         this.level = level == null ? 0L : level;
         this.parentId = parentId;
         this.categoryName = categoryName;
@@ -45,7 +41,7 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public Category category(String id) {
+    public Category category(ObjectId id) {
         this.id = id;
         return this;
     }
