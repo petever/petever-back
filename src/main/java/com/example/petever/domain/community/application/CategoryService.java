@@ -42,7 +42,8 @@ public class CategoryService {
     public Category changeCategoryType(String id, CategoryType categoryType, String changeUserId) {
         return categoryRepository.save(categoryRepository.findById(id)
                 .orElseThrow()
-                .changeCategoryType(categoryType, changeUserId)).getCategory();
+                .changeCategoryType(categoryType, changeUserId))
+                .getCategory();
     }
 
     public Category changeCategoryName(String id, String categoryName, String changeUserId) {
