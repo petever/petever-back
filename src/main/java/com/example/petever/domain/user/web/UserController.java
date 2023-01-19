@@ -30,10 +30,10 @@ public class UserController {
     }
 
     @GetMapping("/{socialType}/login")
-    public UserResponse login(@PathVariable SocialType socialType, @RequestParam String code, HttpServletRequest request, HttpServletResponse response) {
+    public void login(@PathVariable SocialType socialType, @RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User verifiedUser = userService.login(socialType, code);
         sessionService.createSession(verifiedUser, request);
-        return new UserResponse(verifiedUser);
+        response.sendRedirect("https://petever.pet/signin");
     }
 
     @InitBinder
