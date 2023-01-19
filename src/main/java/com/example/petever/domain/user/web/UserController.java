@@ -33,7 +33,7 @@ public class UserController {
     public void login(@PathVariable SocialType socialType, @RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User verifiedUser = userService.login(socialType, code);
         sessionService.createSession(verifiedUser, request);
-        response.sendRedirect("https://petever.pet/");
+        response.sendRedirect("https://petever.pet");
     }
 
     @InitBinder
