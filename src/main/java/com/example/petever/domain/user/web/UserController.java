@@ -5,12 +5,11 @@ import com.example.petever.domain.user.application.UserSessionService;
 import com.example.petever.domain.user.domain.User;
 import com.example.petever.domain.user.enumuration.SocialType;
 import com.example.petever.utils.SocialTypeEnumConverter;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -30,10 +29,10 @@ public class UserController {
     }
 
     @GetMapping("/{socialType}/login")
-    public void login(@PathVariable SocialType socialType, @RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void login(@PathVariable SocialType socialType, @RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User verifiedUser = userService.login(socialType, code);
         sessionService.createSession(verifiedUser, request);
-        response.sendRedirect("https://petever.pet/signin");
+        request.getRequestDispatcher("https://petever.pet/signin").forward(request, response);
     }
 
     @InitBinder
