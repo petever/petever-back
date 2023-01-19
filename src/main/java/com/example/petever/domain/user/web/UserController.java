@@ -19,7 +19,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@CrossOrigin(value = "*")
 public class UserController {
 
     private final UserSessionService sessionService;
@@ -34,7 +33,7 @@ public class UserController {
     public void login(@PathVariable SocialType socialType, @RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User verifiedUser = userService.login(socialType, code);
         sessionService.createSession(verifiedUser, request);
-        response.sendRedirect("https://petever.pet/signin");
+        response.sendRedirect("https://petever.pet/");
     }
 
     @InitBinder
