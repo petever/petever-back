@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public Boolean logout(HttpServletRequest request, HttpServletResponse response) {
+    public Boolean logout(HttpServletRequest request) {
         Boolean isPass = userService.logout(request);
         sessionService.clearSession(request);
         return isPass;
