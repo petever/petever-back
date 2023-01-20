@@ -24,8 +24,13 @@ public class Google implements Social {
     }
 
     @Override
-    public User login(String code) {
+    public SocialUser login(String code) {
         return googleExternalAdapter.certification(code);
+    }
+
+    @Override
+    public Boolean logout(String token) {
+        return null;
     }
 
 

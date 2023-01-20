@@ -1,5 +1,6 @@
 package com.example.petever.domain.user.domain;
 
+import com.example.petever.domain.user.enumuration.SocialType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -10,6 +11,8 @@ public class User {
     @Getter
     private final String email;
     private final String locale;
+    @Getter
+    private final SocialType socialType;
     @Getter
     private String name;
 }

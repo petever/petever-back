@@ -1,6 +1,8 @@
 package com.example.petever.domain.user.external;
 
+import com.example.petever.domain.user.domain.SocialUser;
 import com.example.petever.domain.user.domain.User;
+import com.example.petever.domain.user.enumuration.SocialType;
 import com.example.petever.domain.user.external.request.SocialOauthRequest;
 import com.example.petever.domain.user.external.response.KakaoTokenResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,7 +44,7 @@ public class KakaoExternalAdapter {
         this.snakeCaseObjectMapper = snakeCaseObjectMapper;
     }
 
-    public User certification(String code) {
+    public SocialUser certification(String code) {
         try {
             KakaoTokenResponse response = requestAccessToken(code);
             return verifyToken(response);
@@ -72,7 +74,7 @@ public class KakaoExternalAdapter {
         throw new RuntimeException("카카오 인증 에러");
     }
 
-    private User verifyToken(KakaoTokenResponse kakaoTokenResponse) throws IOException {
+    private SocialUser verifyToken(KakaoTokenResponse kakaoTokenResponse) throws IOException {
         String idToken = kakaoTokenResponse.getIdToken();
         String[] chunks = idToken.split("\\.");
 
@@ -83,6 +85,20 @@ public class KakaoExternalAdapter {
         String userId = (String) map.get("sub");
         String email = (String) map.get("email");
 
-        return new User(userId, email, "");
+        return new SocialUser(new User(userId, email, "", SocialType.KAKAO), kakaoTokenResponse.getAccessToken());
+    }
+
+    public Boolean logout(String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<MultiValueMap> tokenRequestHttpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(KAKAO_OAUTH_BASE_URL, tokenRequestHttpEntity, String.class);
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return true;
+        }
+
+        throw new RuntimeException("logout error");
     }
 }

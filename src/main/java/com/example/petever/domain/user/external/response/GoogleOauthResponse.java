@@ -6,6 +6,7 @@ import lombok.Getter;
 
 public class GoogleOauthResponse {
 
+    @Getter
     private final String accessToken;
     private final String expiresIn;
     private final String refreshToken;
