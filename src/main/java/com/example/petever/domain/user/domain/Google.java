@@ -30,7 +30,7 @@ public class Google implements Social {
 
     @Override
     public Boolean logout(String token) {
-        return null;
+        return googleExternalAdapter.logout(token);
     }
 
 

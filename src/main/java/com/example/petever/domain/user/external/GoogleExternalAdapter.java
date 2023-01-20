@@ -88,4 +88,17 @@ public class GoogleExternalAdapter {
 
         return new SocialUser(new User(userId, email, locale, SocialType.GOOGLE), response.getAccessToken());
     }
+
+    public Boolean logout(String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<SocialOauthRequest> googleTokenRequestHttpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(String.format("https://admin.googleapis.com/admin/directory/v1/users/%s/signOut", token), googleTokenRequestHttpEntity, String.class);
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return true;
+        }
+
+        throw new RuntimeException("logout error");
+    }
 }
