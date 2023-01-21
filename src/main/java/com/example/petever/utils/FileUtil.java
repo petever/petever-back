@@ -31,7 +31,8 @@ public class FileUtil {
             throw new RuntimeException("Not File");
         }
         if (file.exists() && override) {
-            file.deleteOnExit();
+            file.delete();
+            file = new File(filePath);
         }
         if (!file.exists()) {
             try {
