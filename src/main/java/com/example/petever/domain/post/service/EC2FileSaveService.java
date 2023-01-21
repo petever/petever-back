@@ -46,8 +46,8 @@ public class EC2FileSaveService implements RawImageSaveService {
             throw new RuntimeException("Thumbnail Error", e);
         }
         RawImage thumbnailImage = rawImage.thumbnail(thumbnailWidth, thumbnailHeight);
-        String originImagePath = FileUtil.save(images, rawImage.getFileName(), rawImage.getExt(), fileConfiguration);
-        String thumbnailImagePath = FileUtil.save(thumbnailImage.getImage(), thumbnailImage.getFileName(), thumbnailImage.getExt(), fileConfiguration);
+        String originImagePath = FileUtil.save(images, rawImage.getFileName(), rawImage.getExt(), false, true, fileConfiguration);
+        String thumbnailImagePath = FileUtil.save(thumbnailImage.getImage(), thumbnailImage.getFileName(), thumbnailImage.getExt(), false, true, fileConfiguration);
         return new Image(
                 Map.of("fileName", rawImage.getFileName(),
                         "ext", rawImage.getExt(),

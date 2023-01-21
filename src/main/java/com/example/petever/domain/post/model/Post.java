@@ -22,7 +22,8 @@ public class Post {
 
     private String content;
 
-    private List<String> files;
+    private List<ObjectId> images;
+    private List<ObjectId> files;
 
     public Post post(ObjectId id, ObjectId categoryId) {
         this.id = id.toHexString();
