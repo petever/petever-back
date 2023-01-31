@@ -24,4 +24,8 @@ public class Kakao implements Social {
     public User login(String code) {
         return kakaoExternalAdapter.certification(code);
     }
+
+    @Override
+    public void logout(String key) {
+    }
 }

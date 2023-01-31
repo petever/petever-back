@@ -12,4 +12,5 @@ public class User {
     private final String locale;
     @Getter
     private String name;
+    private String profileImage;
 }

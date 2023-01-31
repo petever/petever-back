@@ -28,5 +28,10 @@ public class Google implements Social {
         return googleExternalAdapter.certification(code);
     }
 
+    @Override
+    public void logout(String key) {
+
+    }
+
 
 }

@@ -36,6 +36,10 @@ public class UserController {
         response.sendRedirect("https://petever.pet");
     }
 
+    @PostMapping("/{socialType}/logout")
+    public void logout(@PathVariable SocialType socialType) throws IOException {
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         dataBinder.registerCustomEditor(SocialType.class, new SocialTypeEnumConverter());

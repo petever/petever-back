@@ -72,6 +72,7 @@ public class GoogleExternalAdapter {
                 .setAudience(Collections.singleton(CLIENT_ID))
                 .build();
 
+
         GoogleIdToken idToken = GoogleIdToken.parse(verifier.getJsonFactory(), response.getIdToken());
 
         if (idToken == null) {
