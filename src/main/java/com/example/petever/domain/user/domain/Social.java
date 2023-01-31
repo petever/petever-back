@@ -4,7 +4,7 @@ public interface Social {
 
     String authorization();
 
-    User login(String code);
+    SocialUser login(String code);
 
-    void logout(String key);
+    Boolean logout(String token);
 }

@@ -1,6 +1,8 @@
 package com.example.petever.domain.user.external;
 
+import com.example.petever.domain.user.domain.SocialUser;
 import com.example.petever.domain.user.domain.User;
+import com.example.petever.domain.user.enumuration.SocialType;
 import com.example.petever.domain.user.external.request.SocialOauthRequest;
 import com.example.petever.domain.user.external.response.GoogleOauthResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,7 +44,7 @@ public class GoogleExternalAdapter {
         this.snakeCaseObjectMapper = snakeCaseObjectMapper;
     }
 
-    public User certification(String code) {
+    public SocialUser certification(String code) {
         try {
             GoogleOauthResponse googleOauthResponse = requestAccessToken(code);
             return verifyToken(googleOauthResponse);
@@ -67,7 +69,7 @@ public class GoogleExternalAdapter {
         throw new RuntimeException("구글 인증 에러");
     }
 
-    private User verifyToken(GoogleOauthResponse response) throws IOException {
+    private SocialUser verifyToken(GoogleOauthResponse response) throws IOException {
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
                 .setAudience(Collections.singleton(CLIENT_ID))
                 .build();
@@ -85,6 +87,19 @@ public class GoogleExternalAdapter {
         String email = payload.getEmail();
         String locale = (String) payload.get("locale");
 
-        return new User(userId, email, locale);
+        return new SocialUser(new User(userId, email, locale, SocialType.GOOGLE), response.getAccessToken());
+    }
+
+    public Boolean logout(String token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<SocialOauthRequest> googleTokenRequestHttpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(String.format("https://admin.googleapis.com/admin/directory/v1/users/%s/signOut", token), googleTokenRequestHttpEntity, String.class);
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return true;
+        }
+
+        throw new RuntimeException("logout error");
     }
 }

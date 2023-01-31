@@ -2,6 +2,7 @@ package com.example.petever.domain.user.web;
 
 import com.example.petever.domain.user.application.UserService;
 import com.example.petever.domain.user.application.UserSessionService;
+import com.example.petever.domain.user.domain.SocialUser;
 import com.example.petever.domain.user.domain.User;
 import com.example.petever.domain.user.enumuration.SocialType;
 import com.example.petever.utils.SocialTypeEnumConverter;
@@ -31,13 +32,16 @@ public class UserController {
 
     @GetMapping("/{socialType}/login")
     public void login(@PathVariable SocialType socialType, @RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User verifiedUser = userService.login(socialType, code);
+        SocialUser verifiedUser = userService.login(socialType, code);
         sessionService.createSession(verifiedUser, request);
         response.sendRedirect("https://petever.pet");
     }
 
-    @PostMapping("/{socialType}/logout")
-    public void logout(@PathVariable SocialType socialType) throws IOException {
+    @PostMapping("/logout")
+    public Boolean logout(HttpServletRequest request) {
+        Boolean isPass = userService.logout(request);
+        sessionService.clearSession(request);
+        return isPass;
     }
 
     @InitBinder

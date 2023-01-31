@@ -1,11 +1,15 @@
 package com.example.petever.domain.user.application;
 
 import com.example.petever.domain.user.domain.Social;
+import com.example.petever.domain.user.domain.SocialUser;
 import com.example.petever.domain.user.domain.User;
 import com.example.petever.domain.user.enumuration.SocialType;
 import com.example.petever.domain.user.factory.SocialFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +22,15 @@ public class UserService {
         return social.authorization();
     }
 
-    public User login(SocialType socialType, String code) {
+    public SocialUser login(SocialType socialType, String code) {
         Social social = socialFactory.create(socialType);
         return social.login(code);
+    }
+
+    public Boolean logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        SocialUser user = (SocialUser) session.getAttribute("user");
+        Social social = socialFactory.create(user.getSocialType());
+        return social.logout(user.getToken());
     }
 }
