@@ -93,7 +93,7 @@ public class KakaoExternalAdapter {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.set("Authorization", "Bearer " + token);
         HttpEntity<MultiValueMap> tokenRequestHttpEntity = new HttpEntity<>(headers);
-        ResponseEntity<String> response = restTemplate.postForEntity("https://kapi.kakao.com/v1/user/logout", tokenRequestHttpEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("https://kapi.kakao.com/v1/user/unlink", tokenRequestHttpEntity, String.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
             return true;
