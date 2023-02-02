@@ -29,6 +29,8 @@ public class UserService {
     public Boolean logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         SocialUser user = (SocialUser) session.getAttribute("user");
+        System.out.println("user = " + user);
+        System.out.println("user.getSocialType() = " + user.getSocialType());
         Social social = socialFactory.create(user.getSocialType());
         return social.logout(user.getToken());
     }
