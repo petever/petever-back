@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,4 +37,10 @@ class CommunityBoardServiceTest {
         assertThat(boardResponse.getTitle()).isEqualTo("제목");
     }
 
+    @Test
+    public void boards() {
+        List<CommunityBoard> boards = communityBoardService.boards();
+        boards.stream()
+                .forEach(System.out::println);
+    }
 }

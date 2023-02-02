@@ -2,7 +2,6 @@ package com.example.petever.domain.user.application;
 
 import com.example.petever.domain.user.domain.Social;
 import com.example.petever.domain.user.domain.SocialUser;
-import com.example.petever.domain.user.domain.User;
 import com.example.petever.domain.user.enumuration.SocialType;
 import com.example.petever.domain.user.factory.SocialFactory;
 import lombok.RequiredArgsConstructor;
