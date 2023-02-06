@@ -98,6 +98,9 @@ public class Results {
             contents = "divider";
         }
 
+        System.out.println("type = " + type);
+        System.out.println("contents = " + contents);
+
         return new BoardBlock(this.type, contents);
     }
 
