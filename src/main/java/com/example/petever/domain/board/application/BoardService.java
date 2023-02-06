@@ -63,7 +63,7 @@ public class BoardService {
     public BoardBlocks getBoard(String boardId) {
         List<BoardBlock> boardContents = notionBlocksRepository.findById(boardId)
                 .map(NotionBlocks::getContentBlock)
-                .orElseThrow(() -> new RuntimeException("Not Board Contents"));
+                .orElse(Collections.EMPTY_LIST);
 
         return new BoardBlocks(makeBoardTitle(boardId), boardContents);
     }
