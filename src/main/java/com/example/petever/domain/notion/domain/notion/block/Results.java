@@ -78,7 +78,6 @@ public class Results {
     public BoardBlock getContents() {
         String contents = "";
 
-        System.out.println("type = " + type);
         if (isImage()) {
             contents = this.image.getImageContents();
         }
@@ -98,7 +97,6 @@ public class Results {
         if (isDivider()) {
             contents = "divider";
         }
-        System.out.println("contents = " + contents);
 
         return new BoardBlock(this.type, contents);
     }

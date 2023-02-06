@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Document(collection = "notion_blocks")
@@ -30,6 +31,7 @@ public class NotionBlocks {
 
     public List<BoardBlock> getContentBlock() {
         return results.stream()
+                .filter(Objects::nonNull)
                 .map(Results::getContents)
                 .collect(Collectors.toList());
     }
