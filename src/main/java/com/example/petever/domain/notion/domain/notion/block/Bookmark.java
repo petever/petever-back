@@ -10,6 +10,9 @@ public class Bookmark {
     private final String url;
 
     public String getUrl() {
+        if (url == null) {
+            return "";
+        }
         return this.getUrl();
     }
 }
