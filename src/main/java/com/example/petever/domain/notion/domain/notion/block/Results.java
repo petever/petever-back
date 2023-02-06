@@ -26,7 +26,10 @@ public class Results {
     private final ChildPage childPage;
     private final NotionImage image;
     private final Paragraph paragraph;
-    private final Paragraph heading;
+    private final Divider divider;
+    private final Bookmark bookmark;
+    private final Paragraph heading2;
+    private final Paragraph heading3;
 
     @JsonCreator
     public Results(
@@ -43,7 +46,11 @@ public class Results {
             @JsonProperty("image") NotionImage image,
             @JsonProperty("child_page") ChildPage childPage,
             @JsonProperty("paragraph") Paragraph paragraph,
-            @JsonProperty("heading_2") Paragraph heading) {
+            @JsonProperty("divider") Divider divider,
+            @JsonProperty("bookmark") Bookmark bookmark,
+            @JsonProperty("heading_2") Paragraph heading2,
+            @JsonProperty("heading_3") Paragraph heading3
+    ) {
 
         this.object = object;
         this.id = id;
@@ -58,7 +65,10 @@ public class Results {
         this.image = image;
         this.childPage = childPage;
         this.paragraph = paragraph;
-        this.heading = heading;
+        this.divider = divider;
+        this.bookmark = bookmark;
+        this.heading2 = heading2;
+        this.heading3 = heading3;
     }
 
     public Paragraph getParagraph() {
@@ -77,10 +87,26 @@ public class Results {
         }
 
         if (isHeader()) {
-            contents = this.heading.getParagraphContents();
+            contents = this.heading2.getParagraphContents();
+        }
+
+        if (isBookmark()) {
+            contents = this.bookmark.getUrl();
+        }
+
+        if (isDivider()) {
+            contents = "divider";
         }
 
         return new BoardBlock(this.type, contents);
+    }
+
+    private boolean isDivider() {
+        return this.type == NotionBlockType.DIVIDER;
+    }
+
+    private boolean isBookmark() {
+        return this.type == NotionBlockType.BOOKMARK;
     }
 
     public String getTitle() {
@@ -99,7 +125,7 @@ public class Results {
         return this.type == NotionBlockType.CHILD_PAGE;
     }
 
-    public Boolean isHeader() { return this.type == NotionBlockType.HEADING_2; }
+    public Boolean isHeader() { return this.type == NotionBlockType.HEADING_2 || this.type == NotionBlockType.HEADING_3; }
 
     public String getId() {
         return this.id;

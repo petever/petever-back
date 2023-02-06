@@ -14,5 +14,11 @@ public enum NotionBlockType {
     @JsonProperty("heading_3")
     HEADING_3,
     @JsonProperty("column_list")
-    COLUMN_LIST;
+    COLUMN_LIST,
+    @JsonProperty("bookmark")
+    BOOKMARK,
+    @JsonProperty("divider")
+    DIVIDER;
+
+
 }

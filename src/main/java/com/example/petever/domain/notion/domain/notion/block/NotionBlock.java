@@ -24,8 +24,11 @@ public class NotionBlock extends Results {
                        @JsonProperty("image") NotionImage image,
                        @JsonProperty("child_page") ChildPage childPage,
                        @JsonProperty("paragraph") Paragraph paragraph,
-                       @JsonProperty("heading_2") Paragraph heading) {
-        super(object, id, parent, createdTime, lastEditedTime, createdBy, lastEditedBy, hasChildren, archived, type, image, childPage, paragraph, heading);
+                       @JsonProperty("divider") Divider divider,
+                       @JsonProperty("bookmark") Bookmark bookmark,
+                       @JsonProperty("heading_2") Paragraph heading2,
+                       @JsonProperty("heading_3") Paragraph heading3) {
+        super(object, id, parent, createdTime, lastEditedTime, createdBy, lastEditedBy, hasChildren, archived, type, image, childPage, paragraph, divider, bookmark, heading2, heading3);
     }
 
     public String getTitle() {
