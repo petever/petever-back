@@ -1,5 +1,6 @@
 package com.example.petever.domain.notion.domain.notion.block;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ public class Bookmark {
     private final ArrayList<String> caption;
     private final String url;
 
+    @JsonCreator
     public Bookmark(
             @JsonProperty("caption") ArrayList<String> caption,
             @JsonProperty("url") String url) {

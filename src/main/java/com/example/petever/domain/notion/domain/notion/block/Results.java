@@ -87,7 +87,11 @@ public class Results {
         }
 
         if (isHeader()) {
-            contents = this.heading2.getParagraphContents();
+            if (this.type == NotionBlockType.HEADING_2) {
+                contents = this.heading2.getParagraphContents();
+            } else {
+                contents = this.heading3.getParagraphContents();
+            }
         }
 
         if (isBookmark()) {
