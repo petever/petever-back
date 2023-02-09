@@ -21,6 +21,6 @@ public class Bookmark {
         if (url == null) {
             return "";
         }
-        return this.getUrl();
+        return this.url;
     }
 }
