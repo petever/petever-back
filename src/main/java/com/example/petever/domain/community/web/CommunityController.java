@@ -21,7 +21,7 @@ public class CommunityController {
     }
 
     @GetMapping("/boards/{id}")
-    public CommunityBoard board() {
+    public CommunityBoard board(@PathVariable String id) {
         return communityBoardService.board();
     }
 
