@@ -1,5 +1,6 @@
 package com.example.petever.domain.community.web;
 
+import com.example.petever.domain.community.domain.CommunityBoard;
 import com.example.petever.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,16 +9,24 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class BoardResponse {
 
     private String title;
     private String contents;
     private String preview;
     // Author 객체
-    private String author;
+    private User author;
     private Integer commentCount;
     private Integer viewCount;
+
+    public BoardResponse(CommunityBoard board) {
+        this.title = board.getTitle();
+        this.contents = board.getContents();
+        this.preview = board.getContents();
+        this.author = board.getAuthor();
+        this.commentCount = board.getCommentCount();
+        this.viewCount = board.getViewCount();
+    }
 
     // Tag 객체
 }

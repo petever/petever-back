@@ -1,9 +1,11 @@
 package com.example.petever.domain.user.domain;
 
 import com.example.petever.domain.user.enumuration.SocialType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public class User {
 
