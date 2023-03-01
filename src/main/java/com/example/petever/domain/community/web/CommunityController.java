@@ -57,8 +57,10 @@ public class CommunityController {
     }
 
     @GetMapping("/session")
-    public HttpSession session(HttpServletRequest request) {
+    public String session(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        return session;
+        System.out.println("session id = " + session.getId());
+        System.out.println("session user = " + session.getAttribute("user"));
+        return session.getId();
     }
 }
