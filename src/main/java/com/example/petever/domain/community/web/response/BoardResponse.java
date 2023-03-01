@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class BoardResponse {
 
+    private String id;
     private String title;
     private String contents;
     private String preview;
@@ -20,6 +21,7 @@ public class BoardResponse {
     private Integer viewCount;
 
     public BoardResponse(CommunityBoard board) {
+        this.id = board.getId();
         this.title = board.getTitle();
         this.contents = board.getContents();
         this.preview = board.getContents();
@@ -27,6 +29,4 @@ public class BoardResponse {
         this.commentCount = board.getCommentCount();
         this.viewCount = board.getViewCount();
     }
-
-    // Tag 객체
 }
