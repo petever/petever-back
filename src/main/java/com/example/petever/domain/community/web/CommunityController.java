@@ -7,11 +7,14 @@ import com.example.petever.domain.community.web.request.BoardRequest;
 import com.example.petever.domain.community.web.response.BoardResponse;
 import com.example.petever.domain.community.web.request.BoardUpdateRequest;
 import com.example.petever.domain.user.application.UserSessionService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -51,5 +54,11 @@ public class CommunityController {
     @PatchMapping("/{boardType}/{id}")
     public void update(HttpServletRequest request, BoardUpdateRequest boardUpdateResponse, @PathVariable BoardType boardType, @PathVariable String id) {
         communityBoardService.update(boardUpdateResponse, boardType, id, userSessionService.getUserSession(request));
+    }
+
+    @GetMapping("/session")
+    public HttpSession session(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        return session;
     }
 }
