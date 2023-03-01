@@ -30,7 +30,6 @@ public class CommunityBoard {
     public CommunityBoard(BoardRequest boardRequest, BoardType boardType, User user) {
         this.title = boardRequest.getTitle();
         this.boardType = boardType;
-
         this.contents = boardRequest.getContents();
         this.tags = boardRequest.getTags();
         this.author = user;
@@ -67,7 +66,7 @@ public class CommunityBoard {
         return user.equals(author);
     }
 
-    public void change(BoardUpdateRequest request) {
+    public void change(BoardRequest request) {
         this.title = request.getTitle();
         this.tags = request.getTags();
         this.contents = request.getContents();

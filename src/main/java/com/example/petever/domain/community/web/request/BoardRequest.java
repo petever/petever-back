@@ -1,16 +1,16 @@
 package com.example.petever.domain.community.web.request;
 
 import com.example.petever.domain.community.domain.Tag;
-import com.example.petever.domain.community.enumuration.BoardType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class BoardRequest {
-    private final String title;
-    private final String contents;
-    private final List<Tag> tags;
+    private String title;
+    private String contents;
+    private List<Tag> tags;
 }

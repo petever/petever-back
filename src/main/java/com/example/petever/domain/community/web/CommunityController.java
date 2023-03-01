@@ -42,7 +42,7 @@ public class CommunityController {
     }
 
     @PostMapping("/{boardType}")
-    public void write(HttpServletRequest request, BoardRequest boardRequest, @PathVariable BoardType boardType) {
+    public void write(HttpServletRequest request, @RequestBody BoardRequest boardRequest, @PathVariable BoardType boardType) {
         communityBoardService.write(boardRequest, boardType, userSessionService.getUserSession(request));
     }
 
@@ -52,8 +52,8 @@ public class CommunityController {
     }
 
     @PatchMapping("/{boardType}/{id}")
-    public void update(HttpServletRequest request, BoardUpdateRequest boardUpdateResponse, @PathVariable BoardType boardType, @PathVariable String id) {
-        communityBoardService.update(boardUpdateResponse, boardType, id, userSessionService.getUserSession(request));
+    public void update(HttpServletRequest request, BoardRequest boardRequest, @PathVariable BoardType boardType, @PathVariable String id) {
+        communityBoardService.update(boardRequest, boardType, id, userSessionService.getUserSession(request));
     }
 
     @GetMapping("/session")

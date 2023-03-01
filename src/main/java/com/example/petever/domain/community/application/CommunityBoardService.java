@@ -31,7 +31,7 @@ public class CommunityBoardService {
 
     }
 
-    public CommunityBoard update(BoardUpdateRequest request, BoardType boardType, String boardId,  User user) {
+    public CommunityBoard update(BoardRequest request, BoardType boardType, String boardId,  User user) {
         CommunityBoard foundBoard = communityBoardRepository.findByBoardTypeAndId(boardType, boardId);
 
         if (!foundBoard.isOwner(user)) {

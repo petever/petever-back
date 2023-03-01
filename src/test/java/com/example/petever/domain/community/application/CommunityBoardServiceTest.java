@@ -61,7 +61,7 @@ class CommunityBoardServiceTest {
         CommunityBoard foundBoard = communityBoardService.board(BoardType.QUESTIONS, board.getId());
         Assertions.assertThat(board.getTitle()).isEqualTo("제목");
 
-        BoardUpdateRequest request = new BoardUpdateRequest("제목변경", board.getContents(), board.getAuthor().getUserId(), board.getTags());
+        BoardRequest request = new BoardRequest("제목변경", board.getContents(), board.getTags());
         assertThatThrownBy(() -> communityBoardService.update(request, board.getBoardType() ,board.getId(), new User("21321223", "124214@naver.com", "", SocialType.KAKAO)))
                 .isInstanceOf(RuntimeException.class).hasMessage("작성자만 수정이 가능합니다");
 
