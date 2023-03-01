@@ -49,7 +49,7 @@ public class CommunityController {
     }
 
     @PatchMapping("/{boardType}/{id}")
-    public void update(HttpServletRequest request, BoardRequest boardRequest, @PathVariable BoardType boardType, @PathVariable String id) {
+    public void update(HttpServletRequest request, @RequestBody BoardRequest boardRequest, @PathVariable BoardType boardType, @PathVariable String id) {
         communityBoardService.update(boardRequest, boardType, id, userSessionService.getUserSession(request));
     }
 }

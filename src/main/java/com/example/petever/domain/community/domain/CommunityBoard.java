@@ -7,8 +7,10 @@ import com.example.petever.domain.user.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.Id;
+import java.util.Collections;
 import java.util.List;
 
 @Document(collection = "community_board")
@@ -67,8 +69,16 @@ public class CommunityBoard {
     }
 
     public void change(BoardRequest request) {
-        this.title = request.getTitle();
-        this.tags = request.getTags();
-        this.contents = request.getContents();
+        if (request.getTitle() != null) {
+            this.title = request.getTitle();
+        }
+
+        if (request.getContents() != null) {
+            this.contents = request.getContents();
+        }
+
+        if (!CollectionUtils.isEmpty(request.getTags())) {
+            this.tags = request.getTags();
+        }
     }
 }
