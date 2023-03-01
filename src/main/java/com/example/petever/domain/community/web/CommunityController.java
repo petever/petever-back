@@ -2,13 +2,15 @@ package com.example.petever.domain.community.web;
 
 import com.example.petever.domain.community.application.CommunityBoardService;
 import com.example.petever.domain.community.domain.CommunityBoard;
+import com.example.petever.domain.community.enumuration.BoardType;
 import com.example.petever.domain.community.web.request.BoardRequest;
+import com.example.petever.domain.community.web.response.BoardResponse;
+import com.example.petever.domain.community.web.request.BoardUpdateRequest;
 import com.example.petever.domain.user.application.UserSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -36,8 +38,18 @@ public class CommunityController {
         return new BoardResponse(board);
     }
 
-    @PostMapping
-    public void write(HttpServletRequest request, BoardRequest boardRequest) {
-        communityBoardService.write(boardRequest, userSessionService.getUserSession(request));
+    @PostMapping("/{boardType}")
+    public void write(HttpServletRequest request, BoardRequest boardRequest, @PathVariable BoardType boardType) {
+        communityBoardService.write(boardRequest, boardType, userSessionService.getUserSession(request));
+    }
+
+    @DeleteMapping("/{boardType}/{id}")
+    public void delete(HttpServletRequest request, @PathVariable BoardType boardType, @PathVariable String id) {
+        communityBoardService.delete(boardType, id, userSessionService.getUserSession(request));
+    }
+
+    @PatchMapping("/{boardType}/{id}")
+    public void update(HttpServletRequest request, BoardUpdateRequest boardUpdateResponse, @PathVariable BoardType boardType, @PathVariable String id) {
+        communityBoardService.update(boardUpdateResponse, boardType, id, userSessionService.getUserSession(request));
     }
 }

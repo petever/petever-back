@@ -1,4 +1,4 @@
-package com.example.petever.domain.community.web;
+package com.example.petever.domain.community.enumuration;
 
 public enum BoardType {
     QUESTIONS("questions"),

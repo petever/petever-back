@@ -9,8 +9,9 @@ import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
-public class BoardRequest {
+public class BoardUpdateRequest {
     private final String title;
     private final String contents;
+    private final String authorId;
     private final List<Tag> tags;
 }

@@ -1,8 +1,8 @@
 package com.example.petever.domain.community.domain;
 
-import com.example.petever.domain.community.web.BoardType;
+import com.example.petever.domain.community.enumuration.BoardType;
 import com.example.petever.domain.community.web.request.BoardRequest;
-import com.example.petever.domain.user.domain.SocialUser;
+import com.example.petever.domain.community.web.request.BoardUpdateRequest;
 import com.example.petever.domain.user.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +27,10 @@ public class CommunityBoard {
     private List<Comment> comment;
     private List<Tag> tags;
 
-    public CommunityBoard(BoardRequest boardRequest, User user) {
+    public CommunityBoard(BoardRequest boardRequest, BoardType boardType, User user) {
         this.title = boardRequest.getTitle();
-        this.boardType = boardRequest.getBoardType();
+        this.boardType = boardType;
+
         this.contents = boardRequest.getContents();
         this.tags = boardRequest.getTags();
         this.author = user;
@@ -56,5 +57,19 @@ public class CommunityBoard {
         }
 
         return 0;
+    }
+
+    public void changeTitle(String title) {
+        this.title = title;
+    }
+
+    public boolean isOwner(User user) {
+        return user.equals(author);
+    }
+
+    public void change(BoardUpdateRequest request) {
+        this.title = request.getTitle();
+        this.tags = request.getTags();
+        this.contents = request.getContents();
     }
 }

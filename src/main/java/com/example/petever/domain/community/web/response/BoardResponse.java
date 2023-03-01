@@ -1,4 +1,4 @@
-package com.example.petever.domain.community.web;
+package com.example.petever.domain.community.web.response;
 
 import com.example.petever.domain.community.domain.CommunityBoard;
 import com.example.petever.domain.user.domain.User;
